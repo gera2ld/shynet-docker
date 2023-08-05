@@ -11,6 +11,7 @@ COPY --from=static /usr/src/poetry.lock /usr/src/pyproject.toml ./
 RUN apk add --no-cache libffi-dev gcc musl-dev
 RUN pip install poetry==1.2.2 && \
 	poetry config virtualenvs.in-project true && \
+        poetry run pip install "Cython<3.0" "pyyaml==5.4.1" --no-build-isolation && \
 	poetry install --no-dev --no-interaction --no-ansi
 
 FROM python:alpine3.14
